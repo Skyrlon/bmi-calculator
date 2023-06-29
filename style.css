@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#scale {
+  display: none;
+  border: 1px solid;
+  width: 15rem;
+  height: 40rem;
+}
+
+#scale.show {
+  display: block;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100% / 8);
+}
