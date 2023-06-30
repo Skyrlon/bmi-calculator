@@ -6,13 +6,21 @@ body {
 
 #scale {
   display: none;
+  position: relative;
+  margin-top: 1rem;
   border: 1px solid;
   width: 15rem;
-  height: 40rem;
+  height: 50rem;
 }
 
 #scale.show {
   display: block;
+}
+
+#bmi-text {
+  position: absolute;
+  width: 8rem;
+  right: 100%;
 }
 
 .categories {
@@ -23,5 +31,4 @@ body {
   border: 1px solid;
   box-sizing: border-box;
   width: 100%;
-  height: calc(100% / 8);
 }
