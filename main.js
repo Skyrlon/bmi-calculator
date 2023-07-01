@@ -30,7 +30,7 @@ function getBMI() {
   const height = heightInput.value;
   const weight = weightInput.value;
   const bmi = Math.round((weight / Math.pow(height / 100, 2)) * 100) / 100;
-  bmiElement.textContent = bmi;
+  return bmi;
 }
 
 function createScale() {
@@ -49,6 +49,8 @@ function createScale() {
           ((category.max - category.min) / maxBMI) * 100 + "%";
       }
     });
-    bmiTextElement.style.top = "50%";
   }
+  bmiElement.textContent = getBMI();
+  bmiTextElement.style.top =
+    getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
 }
