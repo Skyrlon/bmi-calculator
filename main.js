@@ -7,14 +7,34 @@ const categoriesElements = document.getElementsByClassName("categories");
 const bmiTextElement = document.getElementById("bmi-text");
 
 const categories = [
-  { name: "Underweight (Severe thinness) ", min: 0, max: 16 },
-  { name: "Underweight (Moderate thinness) ", min: 16, max: 17 },
-  { name: "Underweight (Mild thinness) ", min: 17, max: 18.5 },
-  { name: "Normal range ", min: 18.5, max: 25 },
-  { name: "Overweight (Pre-obese)", min: 25, max: 30 },
-  { name: "Obese (Class I) ", min: 30, max: 35 },
-  { name: "Obese (Class II) ", min: 35, max: 40 },
-  { name: "Obese (Class III) ", min: 40, max: 1 * Math.pow(10, 99) },
+  {
+    name: "Underweight (Severe thinness) ",
+    min: 0,
+    max: 16,
+    color: "navy",
+  },
+  {
+    name: "Underweight (Moderate thinness) ",
+    min: 16,
+    max: 17,
+    color: "blue",
+  },
+  {
+    name: "Underweight (Mild thinness) ",
+    min: 17,
+    max: 18.5,
+    color: "aqua",
+  },
+  { name: "Normal range ", min: 18.5, max: 25, color: "green" },
+  { name: "Overweight (Pre-obese)", min: 25, max: 30, color: "yellow" },
+  { name: "Obese (Class I) ", min: 30, max: 35, color: "orange" },
+  { name: "Obese (Class II) ", min: 35, max: 40, color: "red" },
+  {
+    name: "Obese (Class III) ",
+    min: 40,
+    max: 1 * Math.pow(10, 99),
+    color: "darkred",
+  },
 ];
 
 const maxBMI = 50;
@@ -48,6 +68,8 @@ function createScale() {
         categoriesElements[array.length - 1 - index].style.height =
           ((category.max - category.min) / maxBMI) * 100 + "%";
       }
+      categoriesElements[array.length - 1 - index].style.backgroundColor =
+        category.color;
     });
   }
   bmiElement.textContent = getBMI();
