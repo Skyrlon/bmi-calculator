@@ -57,10 +57,20 @@ function createScale() {
   if (!scaleElement.classList.contains("show")) {
     scaleElement.classList.add("show");
     categories.forEach((category, index, array) => {
-      let span = document.createElement("span");
-
-      span.textContent = category.name;
-      categoriesElements[array.length - 1 - index].append(span);
+      let textElement = document.createElement("span");
+      if (category.max < maxBMI) {
+        let numberElement = document.createElement("span");
+        numberElement.textContent = Math.round(
+          category.max * Math.pow(heightInput.value / 100, 2)
+        );
+        numberElement.style.position = "absolute";
+        numberElement.style.top = "0%";
+        numberElement.style.left = "calc(100% + 0.5rem)";
+        numberElement.style.transform = "translate(0, -50%)";
+        categoriesElements[array.length - 1 - index].append(numberElement);
+      }
+      textElement.textContent = category.name;
+      categoriesElements[array.length - 1 - index].append(textElement);
       if (category.max > maxBMI) {
         categoriesElements[array.length - 1 - index].style.height =
           ((maxBMI - category.min) / maxBMI) * 100 + "%";
