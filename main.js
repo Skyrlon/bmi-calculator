@@ -60,9 +60,7 @@ function createScale() {
       let textElement = document.createElement("span");
       if (category.max < maxBMI) {
         let numberElement = document.createElement("span");
-        numberElement.textContent = Math.round(
-          category.max * Math.pow(heightInput.value / 100, 2)
-        );
+        numberElement.classList.add("scale-numbers");
         numberElement.style.position = "absolute";
         numberElement.style.top = "0%";
         numberElement.style.left = "calc(100% + 0.5rem)";
@@ -82,7 +80,18 @@ function createScale() {
         category.color;
     });
   }
+  addText();
+}
+
+function addText() {
   bmiElement.textContent = getBMI();
   bmiTextElement.style.top =
     getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
+  const scaleNumbers = document.querySelectorAll(".scale-numbers");
+  for (let i = 0; i < scaleNumbers.length; i++) {
+    scaleNumbers[i].textContent = Math.round(
+      categories[scaleNumbers.length - 1 - i].max *
+        Math.pow(heightInput.value / 100, 2)
+    );
+  }
 }
