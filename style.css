@@ -21,6 +21,16 @@ body {
   position: absolute;
   width: 8rem;
   right: 100%;
+  transform: translate(0, -50%);
+}
+
+#bmi-bar {
+  position: absolute;
+  width: 0.5rem;
+  border: 1px solid;
+  box-sizing: border-box;
+  right: 100%;
+  transform: translate(0, -50%);
 }
 
 .categories {

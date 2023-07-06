@@ -5,6 +5,7 @@ const bmiElement = document.getElementById("bmi");
 const scaleElement = document.getElementById("scale");
 const categoriesElements = document.getElementsByClassName("categories");
 const bmiTextElement = document.getElementById("bmi-text");
+const bmiBarElement = document.getElementById("bmi-bar");
 
 const categories = [
   {
@@ -86,6 +87,8 @@ function createScale() {
 function addText() {
   bmiElement.textContent = getBMI();
   bmiTextElement.style.top =
+    getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
+  bmiBarElement.style.top =
     getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
   const scaleNumbers = document.querySelectorAll(".scale-numbers");
   for (let i = 0; i < scaleNumbers.length; i++) {
