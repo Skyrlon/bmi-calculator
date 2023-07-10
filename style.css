@@ -43,3 +43,18 @@ body {
   box-sizing: border-box;
   width: 100%;
 }
+
+#flags {
+  position: absolute;
+  top: 0%;
+  right: calc(0% + 1rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 8rem;
+  height: 10rem;
+}
+
+#flags > * {
+  font-size: 3rem;
+}

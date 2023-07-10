@@ -6,6 +6,7 @@ const scaleElement = document.getElementById("scale");
 const categoriesElements = document.getElementsByClassName("categories");
 const bmiTextElement = document.getElementById("bmi-text");
 const bmiBarElement = document.getElementById("bmi-bar");
+const flagsContainer = document.getElementById("flags");
 
 const categories = [
   {
@@ -98,3 +99,22 @@ function addText() {
     );
   }
 }
+
+function isoToEmoji(code) {
+  return code
+    .split("")
+    .map((letter) => (letter.charCodeAt(0) % 32) + 0x1f1e5)
+    .map((n) => String.fromCodePoint(n))
+    .join("");
+}
+
+function addFlags() {
+  const languages = ["fr", "gb"];
+  languages.forEach((x) => {
+    const flag = document.createElement("div");
+    flag.textContent = isoToEmoji(x);
+    flagsContainer.append(flag);
+  });
+}
+
+addFlags();
