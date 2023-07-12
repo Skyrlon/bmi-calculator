@@ -6,33 +6,53 @@ const scaleElement = document.getElementById("scale");
 const categoriesElements = document.getElementsByClassName("categories");
 const bmiTextElement = document.getElementById("bmi-text");
 const bmiBarElement = document.getElementById("bmi-bar");
-const flagsContainer = document.getElementById("flags");
+const flagsContainer = document.getElementById("flags-container");
 
 const categories = [
   {
-    name: "Underweight (Severe thinness) ",
+    name: { gb: "Underweight (Severe thinness)", fr: "Dénutrition " },
     min: 0,
     max: 16,
     color: "navy",
   },
   {
-    name: "Underweight (Moderate thinness) ",
+    name: { gb: "Underweight (Moderate thinness)", fr: "Maigreur" },
     min: 16,
     max: 17,
     color: "blue",
   },
   {
-    name: "Underweight (Mild thinness) ",
+    name: { gb: "Underweight (Mild thinness)", fr: "Légére maigreur" },
     min: 17,
     max: 18.5,
     color: "aqua",
   },
-  { name: "Normal range ", min: 18.5, max: 25, color: "green" },
-  { name: "Overweight (Pre-obese)", min: 25, max: 30, color: "yellow" },
-  { name: "Obese (Class I) ", min: 30, max: 35, color: "orange" },
-  { name: "Obese (Class II) ", min: 35, max: 40, color: "red" },
   {
-    name: "Obese (Class III) ",
+    name: { gb: "Normal range", fr: "Poids normal" },
+    min: 18.5,
+    max: 25,
+    color: "green",
+  },
+  {
+    name: { gb: "Overweight (Pre-obese)", fr: "Surpoids" },
+    min: 25,
+    max: 30,
+    color: "yellow",
+  },
+  {
+    name: { gb: "Obese (Class I)", fr: "Obésité modérée" },
+    min: 30,
+    max: 35,
+    color: "orange",
+  },
+  {
+    name: { gb: "Obese (Class II)", fr: "Obésité sévère" },
+    min: 35,
+    max: 40,
+    color: "red",
+  },
+  {
+    name: { gb: "Obese (Class III)", fr: "Obésité morbide" },
     min: 40,
     max: 1 * Math.pow(10, 99),
     color: "darkred",
@@ -69,7 +89,7 @@ function createScale() {
         numberElement.style.transform = "translate(0, -50%)";
         categoriesElements[array.length - 1 - index].append(numberElement);
       }
-      textElement.textContent = category.name;
+      textElement.textContent = category.name.gb;
       categoriesElements[array.length - 1 - index].append(textElement);
       if (category.max > maxBMI) {
         categoriesElements[array.length - 1 - index].style.height =
@@ -109,12 +129,30 @@ function isoToEmoji(code) {
 }
 
 function addFlags() {
-  const languages = ["fr", "gb"];
+  const languages = ["gb", "fr"];
   languages.forEach((x) => {
     const flag = document.createElement("div");
+    flag.setAttribute("id", x);
+    flag.classList.add("flags");
     flag.textContent = isoToEmoji(x);
     flagsContainer.append(flag);
   });
 }
 
 addFlags();
+
+function changeLanguage(languageChosen) {
+  for (let i = 0; i < categoriesElements.length; i++) {
+    const element = categoriesElements[i];
+    element.innerHTML = "";
+    let textElement = document.createElement("span");
+    textElement.textContent =
+      categories[categoriesElements.length - 1 - i].name[languageChosen];
+    element.append(textElement);
+  }
+}
+
+for (let i = 0; i < document.getElementsByClassName("flags").length; i++) {
+  const element = document.getElementsByClassName("flags")[i];
+  element.addEventListener("click", () => changeLanguage(element.id));
+}

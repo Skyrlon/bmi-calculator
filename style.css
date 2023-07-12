@@ -44,7 +44,7 @@ body {
   width: 100%;
 }
 
-#flags {
+#flags-container {
   position: absolute;
   top: 0%;
   right: calc(0% + 1rem);
@@ -55,6 +55,7 @@ body {
   height: 10rem;
 }
 
-#flags > * {
+#flags-container > * {
   font-size: 3rem;
+  color: grey;
 }
