@@ -55,7 +55,14 @@ body {
   height: 10rem;
 }
 
-#flags-container > * {
+#flags-container .flags {
   font-size: 3rem;
-  color: grey;
+}
+
+.flags {
+  opacity: 0.25;
+}
+
+.flags.selected {
+  opacity: 1;
 }

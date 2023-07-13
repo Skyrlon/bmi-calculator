@@ -4,9 +4,12 @@ const submitButton = document.getElementById("submit");
 const bmiElement = document.getElementById("bmi");
 const scaleElement = document.getElementById("scale");
 const categoriesElements = document.getElementsByClassName("categories");
+const categoriesTextElements =
+  document.getElementsByClassName("categories-text");
 const bmiTextElement = document.getElementById("bmi-text");
 const bmiBarElement = document.getElementById("bmi-bar");
 const flagsContainer = document.getElementById("flags-container");
+const flagsElements = document.getElementsByClassName("flags");
 
 const categories = [
   {
@@ -80,6 +83,7 @@ function createScale() {
     scaleElement.classList.add("show");
     categories.forEach((category, index, array) => {
       let textElement = document.createElement("span");
+      textElement.classList.add("categories-text");
       if (category.max < maxBMI) {
         let numberElement = document.createElement("span");
         numberElement.classList.add("scale-numbers");
@@ -89,7 +93,6 @@ function createScale() {
         numberElement.style.transform = "translate(0, -50%)";
         categoriesElements[array.length - 1 - index].append(numberElement);
       }
-      textElement.textContent = category.name.gb;
       categoriesElements[array.length - 1 - index].append(textElement);
       if (category.max > maxBMI) {
         categoriesElements[array.length - 1 - index].style.height =
@@ -103,6 +106,8 @@ function createScale() {
     });
   }
   addText();
+  const flagSelected = document.querySelector(".flags.selected");
+  changeLanguage(flagSelected.id);
 }
 
 function addText() {
@@ -132,6 +137,7 @@ function addFlags() {
   const languages = ["gb", "fr"];
   languages.forEach((x) => {
     const flag = document.createElement("div");
+    if (x === "gb") flag.classList.add("selected");
     flag.setAttribute("id", x);
     flag.classList.add("flags");
     flag.textContent = isoToEmoji(x);
@@ -142,17 +148,21 @@ function addFlags() {
 addFlags();
 
 function changeLanguage(languageChosen) {
-  for (let i = 0; i < categoriesElements.length; i++) {
-    const element = categoriesElements[i];
-    element.innerHTML = "";
-    let textElement = document.createElement("span");
-    textElement.textContent =
-      categories[categoriesElements.length - 1 - i].name[languageChosen];
-    element.append(textElement);
-  }
+  [...flagsElements].forEach((element) => {
+    if (element.id === languageChosen) {
+      element.classList.add("selected");
+    } else {
+      element.classList.remove("selected");
+    }
+  });
+  [...categoriesTextElements].forEach(
+    (element, index, array) =>
+      (element.textContent =
+        categories[array.length - 1 - index].name[languageChosen])
+  );
 }
 
-for (let i = 0; i < document.getElementsByClassName("flags").length; i++) {
-  const element = document.getElementsByClassName("flags")[i];
+for (let i = 0; i < flagsElements.length; i++) {
+  const element = flagsElements[i];
   element.addEventListener("click", () => changeLanguage(element.id));
 }
