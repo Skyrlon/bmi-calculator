@@ -2,14 +2,29 @@ const heightInput = document.getElementById("height");
 const weightInput = document.getElementById("weight");
 const submitButton = document.getElementById("submit");
 const bmiElement = document.getElementById("bmi");
+const bmiNumberElement = document.getElementById("bmi-number");
+const bmiTextElement = document.getElementById("bmi-text");
 const scaleElement = document.getElementById("scale");
 const categoriesElements = document.getElementsByClassName("categories");
 const categoriesTextElements =
   document.getElementsByClassName("categories-text");
-const bmiTextElement = document.getElementById("bmi-text");
 const bmiBarElement = document.getElementById("bmi-bar");
 const flagsContainer = document.getElementById("flags-container");
 const flagsElements = document.getElementsByClassName("flags");
+
+const text = [
+  { id: "title", text: { gb: "BMI Calculator", fr: "Calculateur d'IMC" } },
+  {
+    id: "height-text",
+    text: { gb: "Height (in cm) : ", fr: "Taille (en cm) : " },
+  },
+  {
+    id: "weight-text",
+    text: { gb: "Weight (in kg) : ", fr: "Poids (en kg) : " },
+  },
+  { id: "submit", text: { gb: "Get your BMI", fr: "Obtenir votre IMC" } },
+  { id: "bmi-text", text: { gb: "Your BMI : ", fr: "Votre IMC : " } },
+];
 
 const categories = [
   {
@@ -87,10 +102,6 @@ function createScale() {
       if (category.max < maxBMI) {
         let numberElement = document.createElement("span");
         numberElement.classList.add("scale-numbers");
-        numberElement.style.position = "absolute";
-        numberElement.style.top = "0%";
-        numberElement.style.left = "calc(100% + 0.5rem)";
-        numberElement.style.transform = "translate(0, -50%)";
         categoriesElements[array.length - 1 - index].append(numberElement);
       }
       categoriesElements[array.length - 1 - index].append(textElement);
@@ -111,8 +122,8 @@ function createScale() {
 }
 
 function addText() {
-  bmiElement.textContent = getBMI();
-  bmiTextElement.style.top =
+  bmiNumberElement.textContent = getBMI();
+  bmiElement.style.top =
     getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
   bmiBarElement.style.top =
     getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
@@ -148,6 +159,12 @@ function addFlags() {
 addFlags();
 
 function changeLanguage(languageChosen) {
+  document.title = text.find((x) => x.id === "title").text[languageChosen];
+
+  text.forEach(
+    (e) => (document.getElementById(e.id).textContent = e.text[languageChosen])
+  );
+
   [...flagsElements].forEach((element) => {
     if (element.id === languageChosen) {
       element.classList.add("selected");

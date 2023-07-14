@@ -17,7 +17,14 @@ body {
   display: block;
 }
 
-#bmi-text {
+.scale-numbers {
+  position: absolute;
+  top: 0%;
+  left: calc(100% + 0.5rem);
+  transform: translate(0, -50%);
+}
+
+#bmi {
   position: absolute;
   width: 8rem;
   right: 100%;
