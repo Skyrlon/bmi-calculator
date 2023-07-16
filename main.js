@@ -78,6 +78,7 @@ const categories = [
 ];
 
 const maxBMI = 50;
+let weight, height;
 
 submitButton.addEventListener("click", handleSubmit);
 
@@ -87,8 +88,8 @@ function handleSubmit() {
 }
 
 function getBMI() {
-  const height = heightInput.value;
-  const weight = weightInput.value;
+  height = heightInput.value;
+  weight = weightInput.value;
   const bmi = Math.round((weight / Math.pow(height / 100, 2)) * 100) / 100;
   return bmi;
 }
@@ -96,24 +97,23 @@ function getBMI() {
 function createScale() {
   if (!scaleElement.classList.contains("show")) {
     scaleElement.classList.add("show");
-    categories.forEach((category, index, array) => {
+    categories.forEach((category, index) => {
       let textElement = document.createElement("span");
       textElement.classList.add("categories-text");
       if (category.max < maxBMI) {
         let numberElement = document.createElement("span");
         numberElement.classList.add("scale-numbers");
-        categoriesElements[array.length - 1 - index].append(numberElement);
+        categoriesElements[index].append(numberElement);
       }
-      categoriesElements[array.length - 1 - index].append(textElement);
+      categoriesElements[index].append(textElement);
       if (category.max > maxBMI) {
-        categoriesElements[array.length - 1 - index].style.height =
+        categoriesElements[index].style.height =
           ((maxBMI - category.min) / maxBMI) * 100 + "%";
       } else {
-        categoriesElements[array.length - 1 - index].style.height =
+        categoriesElements[index].style.height =
           ((category.max - category.min) / maxBMI) * 100 + "%";
       }
-      categoriesElements[array.length - 1 - index].style.backgroundColor =
-        category.color;
+      categoriesElements[index].style.backgroundColor = category.color;
     });
   }
   addText();
@@ -130,8 +130,7 @@ function addText() {
   const scaleNumbers = document.querySelectorAll(".scale-numbers");
   for (let i = 0; i < scaleNumbers.length; i++) {
     scaleNumbers[i].textContent = Math.round(
-      categories[scaleNumbers.length - 1 - i].max *
-        Math.pow(heightInput.value / 100, 2)
+      categories[i].max * Math.pow(height / 100, 2)
     );
   }
 }
@@ -173,9 +172,8 @@ function changeLanguage(languageChosen) {
     }
   });
   [...categoriesTextElements].forEach(
-    (element, index, array) =>
-      (element.textContent =
-        categories[array.length - 1 - index].name[languageChosen])
+    (element, index) =>
+      (element.textContent = categories[index].name[languageChosen])
   );
 }
 
