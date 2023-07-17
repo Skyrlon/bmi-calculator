@@ -7,38 +7,79 @@ body {
 #scale {
   display: none;
   position: relative;
-  margin-top: 1rem;
   border: 1px solid;
-  width: 15rem;
-  height: 50rem;
 }
 
 #scale.show {
   display: flex;
-  flex-direction: column-reverse;
 }
 
 .scale-numbers {
   position: absolute;
-  top: 0%;
-  left: calc(100% + 0.5rem);
-  transform: translate(0, -50%);
 }
 
 #bmi {
   position: absolute;
   width: 8rem;
-  right: 100%;
   transform: translate(0, -50%);
 }
 
 #bmi-bar {
   position: absolute;
-  width: 0.5rem;
   border: 1px solid;
   box-sizing: border-box;
-  right: 100%;
-  transform: translate(0, -50%);
+}
+
+@media (orientation: portrait) {
+  #scale {
+    margin-top: 1rem;
+    width: 15rem;
+    height: 50rem;
+    flex-direction: column-reverse;
+  }
+
+  .scale-numbers {
+    top: 0%;
+    left: calc(100% + 0.5rem);
+    transform: translate(0, -50%);
+  }
+
+  #bmi {
+    right: 100%;
+    transform: translate(0, -50%);
+  }
+
+  #bmi-bar {
+    width: 0.5rem;
+    right: 100%;
+    transform: translate(0, -50%);
+  }
+}
+
+@media (orientation: landscape) {
+  #scale {
+    margin-top: 5rem;
+    width: 75%;
+    height: 15rem;
+    flex-direction: row;
+  }
+
+  .scale-numbers {
+    top: calc(100% + 0.5rem);
+    left: calc(100%);
+    transform: translate(-50%, 0);
+  }
+
+  #bmi {
+    bottom: calc(100% + 1rem);
+    transform: translate(-50%, 0%);
+  }
+
+  #bmi-bar {
+    height: 0.5rem;
+    bottom: 100%;
+    transform: translate(-50%, 0%);
+  }
 }
 
 .categories {

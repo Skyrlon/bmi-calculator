@@ -181,3 +181,47 @@ for (let i = 0; i < flagsElements.length; i++) {
   const element = flagsElements[i];
   element.addEventListener("click", () => changeLanguage(element.id));
 }
+
+function onResize() {
+  bmiElement.style = "";
+  bmiBarElement.style = "";
+  [...categoriesElements].forEach((e) => {
+    e.style.height = "";
+    e.style.width = "";
+  });
+  //Landscape
+  if (window.innerWidth > window.innerHeight) {
+    bmiElement.style.left =
+      getBMI() > maxBMI ? "100%" : (getBMI() / maxBMI) * 100 + "%";
+    bmiBarElement.style.left =
+      getBMI() > maxBMI ? "100%" : (getBMI() / maxBMI) * 100 + "%";
+    [...categoriesElements].forEach((e, index) => {
+      if (categories[index].max > maxBMI) {
+        e.style.width = ((maxBMI - categories[index].min) / maxBMI) * 100 + "%";
+      } else {
+        e.style.width =
+          ((categories[index].max - categories[index].min) / maxBMI) * 100 +
+          "%";
+      }
+    });
+  }
+  //Portrait
+  else {
+    bmiElement.style.top =
+      getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
+    bmiBarElement.style.top =
+      getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
+    [...categoriesElements].forEach((e, index) => {
+      if (categories[index].max > maxBMI) {
+        e.style.height =
+          ((maxBMI - categories[index].min) / maxBMI) * 100 + "%";
+      } else {
+        e.style.height =
+          ((categories[index].max - categories[index].min) / maxBMI) * 100 +
+          "%";
+      }
+    });
+  }
+}
+
+window.onresize = onResize;
