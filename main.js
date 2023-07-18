@@ -106,27 +106,17 @@ function createScale() {
         categoriesElements[index].append(numberElement);
       }
       categoriesElements[index].append(textElement);
-      if (category.max > maxBMI) {
-        categoriesElements[index].style.height =
-          ((maxBMI - category.min) / maxBMI) * 100 + "%";
-      } else {
-        categoriesElements[index].style.height =
-          ((category.max - category.min) / maxBMI) * 100 + "%";
-      }
       categoriesElements[index].style.backgroundColor = category.color;
     });
   }
   addText();
+  onResize();
   const flagSelected = document.querySelector(".flags.selected");
   changeLanguage(flagSelected.id);
 }
 
 function addText() {
   bmiNumberElement.textContent = getBMI();
-  bmiElement.style.top =
-    getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
-  bmiBarElement.style.top =
-    getBMI() > maxBMI ? 0 + "%" : 100 - (getBMI() / maxBMI) * 100 + "%";
   const scaleNumbers = document.querySelectorAll(".scale-numbers");
   for (let i = 0; i < scaleNumbers.length; i++) {
     scaleNumbers[i].textContent = Math.round(
