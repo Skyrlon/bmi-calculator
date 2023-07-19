@@ -1,7 +1,29 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 5rem;
+}
+
+#inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 25rem;
 }
 
 #scale {
@@ -34,7 +56,7 @@ body {
   #scale {
     margin-top: 1rem;
     width: 15rem;
-    height: 50rem;
+    height: calc(95vh - 10rem);
     flex-direction: column-reverse;
   }
 
@@ -58,8 +80,8 @@ body {
 
 @media (orientation: landscape) {
   #scale {
-    margin-top: 5rem;
-    width: 75%;
+    margin-top: calc((100vh - 35rem) / 2);
+    width: 80%;
     height: 15rem;
     flex-direction: row;
   }
@@ -101,7 +123,6 @@ body {
   flex-direction: row;
   justify-content: space-around;
   width: 8rem;
-  height: 10rem;
 }
 
 #flags-container .flags {
