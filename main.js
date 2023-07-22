@@ -83,8 +83,10 @@ let weight, height;
 submitButton.addEventListener("click", handleSubmit);
 
 function handleSubmit() {
-  getBMI();
-  createScale();
+  if (Number(heightInput.value) && Number(heightInput.value)) {
+    getBMI();
+    createScale();
+  }
 }
 
 function getBMI() {
