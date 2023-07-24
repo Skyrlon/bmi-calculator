@@ -83,15 +83,15 @@ let weight, height;
 submitButton.addEventListener("click", handleSubmit);
 
 function handleSubmit() {
-  if (Number(heightInput.value) && Number(heightInput.value)) {
+  if (Number(heightInput.value.trim()) && Number(weightInput.value.trim())) {
     getBMI();
     createScale();
   }
 }
 
 function getBMI() {
-  height = heightInput.value;
-  weight = weightInput.value;
+  height = heightInput.value.trim();
+  weight = weightInput.value.trim();
   const bmi = Math.round((weight / Math.pow(height / 100, 2)) * 100) / 100;
   return bmi;
 }
