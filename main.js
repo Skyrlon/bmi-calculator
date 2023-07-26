@@ -83,9 +83,22 @@ let weight, height;
 submitButton.addEventListener("click", handleSubmit);
 
 function handleSubmit() {
+  [...document.getElementsByClassName("error-message")].forEach((e) =>
+    e.remove()
+  );
   if (Number(heightInput.value.trim()) && Number(weightInput.value.trim())) {
     getBMI();
     createScale();
+  } else {
+    [heightInput, weightInput].forEach((e) => {
+      if (!Number(e.value.trim())) {
+        const span = document.createElement("span");
+        const errorMessage = "Insert correct number";
+        span.classList.add("error-message");
+        span.textContent = errorMessage;
+        e.parentElement.append(span);
+      }
+    });
   }
 }
 

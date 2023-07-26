@@ -26,6 +26,15 @@ body {
   width: 25rem;
 }
 
+#inputs label {
+  display: flex;
+  flex-direction: column;
+}
+
+.error-message {
+  color: red;
+}
+
 #scale {
   display: none;
   position: relative;
