@@ -26,7 +26,7 @@ body {
   width: 25rem;
 }
 
-#inputs label {
+.input-container {
   display: flex;
   flex-direction: column;
 }

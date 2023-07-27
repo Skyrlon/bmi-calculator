@@ -1,5 +1,5 @@
-const heightInput = document.getElementById("height");
-const weightInput = document.getElementById("weight");
+const heightInput = document.getElementById("height-input");
+const weightInput = document.getElementById("weight-input");
 const submitButton = document.getElementById("submit");
 const bmiElement = document.getElementById("bmi");
 const bmiNumberElement = document.getElementById("bmi-number");
