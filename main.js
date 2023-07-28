@@ -22,6 +22,10 @@ const text = [
     id: "weight-text",
     text: { gb: "Weight (in kg) : ", fr: "Poids (en kg) : " },
   },
+  {
+    id: "error-message",
+    text: { gb: "Incorrect number", fr: "Nombre incorrect " },
+  },
   { id: "submit", text: { gb: "Get your BMI", fr: "Obtenir votre IMC" } },
   { id: "bmi-text", text: { gb: "Your BMI : ", fr: "Votre IMC : " } },
 ];
@@ -165,8 +169,12 @@ addFlags();
 function changeLanguage(languageChosen) {
   document.title = text.find((x) => x.id === "title").text[languageChosen];
 
-  text.forEach(
-    (e) => (document.getElementById(e.id).textContent = e.text[languageChosen])
+  text.forEach((e) =>
+    document.getElementById(e.id)
+      ? (document.getElementById(e.id).textContent = e.text[languageChosen])
+      : [...document.getElementsByClassName(e.id)].forEach(
+          (x) => (x.textContent = e.text[languageChosen])
+        )
   );
 
   [...flagsElements].forEach((element) => {
